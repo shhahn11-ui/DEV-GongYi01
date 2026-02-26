@@ -11,6 +11,9 @@ const parksGrid = document.getElementById('parks-list');
 const parksHint = document.getElementById('parks-hint');
 
 let profileCoords = null;
+let browserCoords = null;
+let lastBrowserCoords = null;
+let geoWatchId = null;
 
 let map;
 let markersLayer;
@@ -21,6 +24,7 @@ let skipNextMoveFetch = false;
 
 const RADIUS_M = 2000;
 const MAX_PARKS = 20;
+const MIN_MOVE_FOR_FETCH_M = 25;
 
 const formatDistance = meters => {
   if (meters < 1000) return `${Math.round(meters)}m`;
@@ -209,13 +213,7 @@ const handleLocate = () => {
     return;
   }
   const { lat, lon } = profileCoords;
-  setStatus('프로필 위치로 공원을 불러옵니다…');
-  skipNextMoveFetch = true;
-  ensureMap(lat, lon);
-  fetchParks(lat, lon).catch(err => {
-    console.error(err);
-    setStatus('주변 공원 데이터를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.', true);
-  });
+  loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
 };
 
 const geocodeAddress = async text => {
@@ -237,20 +235,14 @@ const handleAddressSearch = async () => {
   setStatus('주소를 검색하고 있습니다…');
   try {
     const coords = await geocodeAddress(text);
-    skipNextMoveFetch = true;
-    ensureMap(coords.lat, coords.lon);
-    fetchParks(coords.lat, coords.lon).catch(err => {
-      console.error(err);
-      setStatus('주변 공원 데이터를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.', true);
-    });
-    setStatus('검색한 위치 기준 반경 2km를 표시합니다.');
+    loadAndRender(coords.lat, coords.lon, '검색한 위치 기준 반경 2km를 표시합니다.');
   } catch (err) {
     console.error(err);
     setStatus('주소를 찾지 못했습니다. 다른 이름으로 시도해주세요.', true);
   }
 };
 
-const verifyContext = () => true; // 위치 권한을 사용하지 않으므로 보안 컨텍스트 강제 없음
+const verifyContext = () => true; // HTTPS에서 동작 권장 (geolocation 요청)
 
 const includesSportWord = name => {
   if (!name) return false;
@@ -258,21 +250,55 @@ const includesSportWord = name => {
   return /농구|basketball|축구|soccer|풋살|futsal|야구|baseball|테니스|tennis|배드민턴|badminton|볼링|bowling/.test(lower);
 };
 
-// 초기 지도 뷰를 서울 시청 근처로 설정 (기본값)
-ensureMap(37.5665, 126.9780);
-setStatus('회원가입 시 입력한 위치로 공원을 표시합니다.');
-hintEl.textContent = '지도 중앙을 움직이면 반경 2km 공원을 표시합니다.';
-if (locateBtn) locateBtn.addEventListener('click', handleLocate);
-if (addressSearchBtn) addressSearchBtn.addEventListener('click', handleAddressSearch);
-
-// 외부에서 프로필 좌표를 설정하고 불러올 수 있도록 공개 함수 제공
-window.loadParksAtLocation = (lat, lon) => {
-  profileCoords = { lat, lon };
-  setStatus('프로필 위치로 공원을 불러옵니다…');
+const loadAndRender = (lat, lon, statusMessage) => {
+  if (statusMessage) setStatus(statusMessage);
   skipNextMoveFetch = true;
   ensureMap(lat, lon);
   fetchParks(lat, lon).catch(err => {
     console.error(err);
     setStatus('주변 공원 데이터를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.', true);
   });
+};
+
+const startBrowserTracking = () => {
+  if (!navigator.geolocation) {
+    setStatus('현재 위치 기능을 지원하지 않는 브라우저입니다. 프로필 위치나 주소 검색을 사용하세요.', true);
+    return;
+  }
+
+  setStatus('현재 위치를 확인하는 중입니다. 브라우저의 위치 권한을 허용해주세요.');
+
+  geoWatchId = navigator.geolocation.watchPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      browserCoords = { lat: latitude, lon: longitude };
+      const movedEnough = !lastBrowserCoords || haversine(lastBrowserCoords.lat, lastBrowserCoords.lon, latitude, longitude) > MIN_MOVE_FOR_FETCH_M;
+      if (!movedEnough) return;
+      lastBrowserCoords = { lat: latitude, lon: longitude };
+      if (hintEl) hintEl.textContent = '브라우저 위치 기반으로 반경 2km 공원을 표시합니다. 지도 이동 시 다시 불러옵니다.';
+      if (parksHint) parksHint.textContent = '브라우저 위치 기준 추천 (반경 2km)';
+      loadAndRender(latitude, longitude, '현재 위치 기준으로 공원을 표시합니다.');
+    },
+    err => {
+      console.error(err);
+      const denied = err.code === 1;
+      setStatus(denied ? '위치 권한이 거부되었습니다. 주소 검색이나 프로필 위치를 사용하세요.' : '현재 위치를 가져올 수 없습니다. 네트워크 상태를 확인해주세요.', true);
+      if (hintEl) hintEl.textContent = '주소 검색 또는 프로필 위치로 공원을 불러올 수 있습니다.';
+    },
+    { enableHighAccuracy: true, maximumAge: 15000, timeout: 10000 }
+  );
+};
+
+// 초기 지도 뷰를 서울 시청 근처로 설정 (기본값)
+ensureMap(37.5665, 126.9780);
+setStatus('브라우저 위치 권한을 요청해 현재 위치 기반으로 공원을 표시합니다. 거부 시 프로필 위치나 주소 검색을 사용하세요.');
+hintEl.textContent = '위치 허용 시 현재 위치 기준 2km 공원을 자동 표시합니다. 지도 이동 시 다시 불러옵니다.';
+if (locateBtn) locateBtn.addEventListener('click', handleLocate);
+if (addressSearchBtn) addressSearchBtn.addEventListener('click', handleAddressSearch);
+startBrowserTracking();
+
+// 외부에서 프로필 좌표를 설정하고 불러올 수 있도록 공개 함수 제공
+window.loadParksAtLocation = (lat, lon) => {
+  profileCoords = { lat, lon };
+  loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
 };
