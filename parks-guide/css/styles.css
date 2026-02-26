@@ -578,6 +578,11 @@ body.locked footer {
   align-items: center;
   font-weight: 700;
   color: var(--muted);
+  margin-top: 4px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
 }
 
 .range-row input[type="range"] {
