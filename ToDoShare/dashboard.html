@@ -12,268 +12,95 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    body {
+      background: #f1f2f4;
+    }
+    .main-content {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 12px 10px 28px;
+    }
+    header, nav {
+      max-width: 420px;
+      margin: 0 auto;
+    }
     .status-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
     }
-
     .status-card {
-      background: #f8f9ff;
-      border: 1px solid #e4e7ff;
+      background: #fff;
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
-      padding: 1rem 1.25rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      padding: 10px 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+      text-align: left;
+      min-height: 72px;
     }
-
     .status-label {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 0.35rem;
+      color: #6b7280;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      font-weight: 700;
     }
-
     .status-value {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 800;
-      color: #4a56e2;
+      color: #3b4bd8;
       line-height: 1.2;
     }
-
-    .weather-card {
-      background: linear-gradient(135deg, #eef2ff 0%, #f7f9ff 100%);
-      border: 1px solid #dfe4ff;
-      border-radius: 14px;
-      padding: 1.35rem 1.5rem;
-      margin: 1.4rem 0 1.75rem;
-      box-shadow: 0 12px 26px rgba(90, 108, 234, 0.16);
-    }
-
-    .weather-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .weather-location {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #1f2d3d;
-    }
-
-    .weather-date-badge {
-      background: #fff;
-      border: 1px solid #dfe3f7;
-      color: #3f51b5;
-      border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    .weather-toggle-btn {
-      margin-left: auto;
-      padding: 0.35rem 0.7rem;
-      border: 1px solid #dfe3f7;
-      border-radius: 8px;
-      background: #fff;
-      cursor: pointer;
-      font-weight: 700;
-      color: #1f2d3d;
-    }
-
-    .weather-toggle-btn:hover {
-      background: #eef2ff;
-    }
-
-    .weather-override {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.5rem;
-      align-items: center;
-    }
-
-    .weather-override input {
-      flex: 1 1 180px;
-      padding: 0.45rem 0.6rem;
-      border: 1px solid #dfe3f7;
-      border-radius: 8px;
-      font-size: 0.95rem;
-    }
-
-    .weather-override button {
-      padding: 0.45rem 0.75rem;
-      border: 1px solid #dfe3f7;
-      border-radius: 8px;
-      background: #fff;
-      cursor: pointer;
-      font-weight: 700;
-      color: #1f2d3d;
-    }
-
-    .weather-override button:hover {
-      background: #eef2ff;
-    }
-
-    .weather-body {
-      display: flex;
-      gap: 1.25rem;
-      align-items: stretch;
-      flex-wrap: wrap;
-    }
-
-    .weather-left {
-      flex: 0 1 280px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .weather-main {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.75rem 1rem;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .weather-icon {
-      font-size: 2.5rem;
-    }
-
-    .weather-temp {
-      font-size: 2.6rem;
-      font-weight: 900;
-      color: #1e2b7b;
-      line-height: 1.1;
-    }
-
-    .weather-desc {
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      font-weight: 700;
-    }
-
-    .weather-minmax {
-      color: #4b5563;
-      font-weight: 600;
-      margin-top: 0.1rem;
-    }
-
-    .weather-meta {
-      color: #556987;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .weather-advice-panel {
-      flex: 1 1 340px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1rem 1.15rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      min-height: 150px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .weather-advice-title {
-      font-weight: 800;
-      color: #1e293b;
-      font-size: 1rem;
-    }
-
-    .weather-advice {
-      color: #1e293b;
-      font-weight: 700;
-      font-size: 1.45rem;
-      line-height: 1.5;
-      min-height: 3.6em;
-      word-break: keep-all;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .weather-error {
-      color: #d14343;
-      background: #fff0f0;
-      border: 1px solid #f7c4c4;
-      padding: 0.65rem 0.8rem;
-      border-radius: 8px;
-      margin-top: 0.35rem;
-      display: none;
-    }
-
-    .status-sub {
-      color: #666;
-      font-size: 0.9rem;
-      margin-top: 0.2rem;
-    }
+    .status-sub { color: #6b7280; font-size: 0.78rem; margin-top: 2px; }
     .motivation-box {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 2.5rem 2rem;
-      margin-bottom: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      background: linear-gradient(135deg, #5a4be1 0%, #7a6df0 100%);
+      padding: 18px 16px;
+      margin: 8px 0 14px;
+      border-radius: 14px;
+      box-shadow: 0 10px 26px rgba(70, 60, 200, 0.28);
       text-align: center;
-      animation: slideInDown 0.6s ease-out;
+      color: #fff;
     }
-
-    @keyframes slideInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .motivation-label { font-size: 0.9rem; font-weight: 700; opacity: 0.9; }
+    .motivation-text { font-size: 1.2rem; font-weight: 800; line-height: 1.55; margin: 10px 0 16px; }
+    .motivation-author { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .motivation-date { font-size: 0.85rem; opacity: 0.9; }
+    .date-display { display: inline; }
+    .weather-card {
+      background: linear-gradient(135deg, #eaf2ff 0%, #eef4ff 100%);
+      border: 1px solid #dfe5ff;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 6px 0 14px;
+      box-shadow: 0 10px 24px rgba(100, 120, 220, 0.14);
     }
-
-    .motivation-label {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    .weather-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .weather-location { font-size: 1rem; font-weight: 800; color: #1f2d3d; }
+    .weather-date-badge { background: #fff; border: 1px solid #dfe3f7; color: #3f51b5; border-radius: 12px; padding: 2px 10px; font-weight: 700; font-size: 0.9rem; }
+    .weather-body { display: flex; align-items: center; justify-content: space-between; }
+    .weather-temp { font-size: 1.3rem; font-weight: 900; color: #1e2b7b; }
+    .weather-advice { color: #111827; font-weight: 700; font-size: 0.98rem; line-height: 1.5; }
+    .todo-section {
+      background: #ffffff;
+      padding: 14px 12px;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(17, 24, 39, 0.06);
+      border: 1px solid #e5e7eb;
+      margin-bottom: 16px;
     }
-
-    .motivation-text {
-      font-size: 2rem;
-      color: white;
-      font-weight: 700;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .motivation-author {
-      font-size: 1.05rem;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .motivation-date {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.95);
-      font-weight: 500;
-    }
-
-    .date-display {
-      display: inline;
-    }
+    .todo-input-group { gap: 10px; }
+    .todo-input-group input, .todo-input-group select { border-radius: 12px; border: 1px solid #d1d5db; background: #f9fafb; }
+    .todo-input-group .btn { border-radius: 12px; }
+    .btn-primary, .btn { background: #2c61ff; color: #fff; font-weight: 800; }
+    .btn-primary:hover, .btn:hover { background: #1f4fe0; }
+    .todo-item { border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 8px 18px rgba(15,23,42,0.05); background: #fff; }
+    .todo-category { background: #fef3c7; color: #c2410c; border-radius: 999px; font-weight: 800; }
+    .pill-small { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 12px; }
+    .pill-orange { background: #fef3c7; color: #c2410c; }
+    .pill-green { background: #dcfce7; color: #166534; }
+    .pill-blue { background: #e0f2fe; color: #1d4ed8; }
+    .chip-danger { background: #fee2e2; color: #b91c1c; }
+  </style>
 
     /* 할일 입력 */
     .todo-input-group {

@@ -28,6 +28,10 @@ const MAX_PARKS = 20;
 const MIN_MOVE_FOR_FETCH_M = 25;
 const FETCH_ON_DRAG = false; // 지도 드래그 시 자동 재조회 여부
 let radiusMeters = RADIUS_M;
+const OVERPASS_ENDPOINTS = [
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.kumi.systems/api/interpreter'
+];
 
 const formatDistance = meters => {
   if (meters < 1000) return `${Math.round(meters)}m`;
@@ -184,7 +188,6 @@ const blockAccess = message => {
 
 const fetchParks = async (lat, lon) => {
   setStatus('주변 공원을 찾는 중입니다…');
-  const overpassUrl = 'https://overpass-api.de/api/interpreter';
   const query = `
     [out:json][timeout:25];
     (
@@ -195,14 +198,32 @@ const fetchParks = async (lat, lon) => {
     out center ${MAX_PARKS};
   `;
 
-  const res = await fetch(overpassUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `data=${encodeURIComponent(query)}`
-  });
+  let data = null;
+  let lastErr = null;
 
-  if (!res.ok) throw new Error('Overpass API 응답 오류');
-  const data = await res.json();
+  for (const endpoint of OVERPASS_ENDPOINTS) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `data=${encodeURIComponent(query)}`,
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error('Overpass 응답 오류');
+      data = await res.json();
+      break;
+    } catch (err) {
+      console.error('Overpass 실패', endpoint, err);
+      lastErr = err;
+    }
+  }
+
+  if (!data) {
+    throw lastErr || new Error('Overpass 요청 실패');
+  }
 
   const parks = (data.elements || [])
     .map(el => {
@@ -226,7 +247,7 @@ const fetchParks = async (lat, lon) => {
     .slice(0, MAX_PARKS);
 
   if (!parks.length) {
-    setStatus('근처 공원을 찾지 못했습니다. 지도를 이동해 보세요.', true);
+    setStatus('근처 공원을 찾지 못했습니다. 반경을 늘리거나 잠시 후 다시 시도해주세요.', true);
     listContainer.innerHTML = '';
     markersLayer.clearLayers();
     renderTopParks([]);
