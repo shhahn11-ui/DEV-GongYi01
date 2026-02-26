@@ -25,6 +25,7 @@ let skipNextMoveFetch = false;
 const RADIUS_M = 2000;
 const MAX_PARKS = 20;
 const MIN_MOVE_FOR_FETCH_M = 25;
+const FETCH_ON_DRAG = false; // 지도 드래그 시 자동 재조회 여부
 
 const formatDistance = meters => {
   if (meters < 1000) return `${Math.round(meters)}m`;
@@ -59,6 +60,7 @@ const ensureMap = (lat, lon) => {
     markersLayer = L.layerGroup().addTo(map);
 
     map.on('moveend', () => {
+      if (!FETCH_ON_DRAG) return;
       if (skipNextMoveFetch) {
         skipNextMoveFetch = false;
         return;
@@ -304,7 +306,7 @@ const startBrowserTracking = () => {
       const movedEnough = !lastBrowserCoords || haversine(lastBrowserCoords.lat, lastBrowserCoords.lon, latitude, longitude) > MIN_MOVE_FOR_FETCH_M;
       if (!movedEnough) return;
       lastBrowserCoords = { lat: latitude, lon: longitude };
-      if (hintEl) hintEl.textContent = '브라우저 위치 기반으로 반경 2km 공원을 표시합니다. 지도 이동 시 다시 불러옵니다.';
+      if (hintEl) hintEl.textContent = '브라우저 위치 기반으로 반경 2km 공원을 표시합니다. 지도 이동과 무관하게 현재 위치를 기준으로 유지합니다.';
       if (parksHint) parksHint.textContent = '브라우저 위치 기준 추천 (반경 2km)';
       loadAndRender(latitude, longitude, '현재 위치 기준으로 공원을 표시합니다.');
     },
@@ -321,7 +323,7 @@ const startBrowserTracking = () => {
 // 초기 지도 뷰를 서울 시청 근처로 설정 (기본값)
 ensureMap(37.5665, 126.9780);
 setStatus('브라우저 위치 권한을 요청해 현재 위치 기반으로 공원을 표시합니다. 거부 시 프로필 위치나 주소 검색을 사용하세요.');
-hintEl.textContent = '위치 허용 시 현재 위치 기준 2km 공원을 자동 표시합니다. 지도 이동 시 다시 불러옵니다.';
+hintEl.textContent = '위치 허용 시 현재 위치 기준 2km 공원을 자동 표시합니다. 지도 이동과 관계없이 현재 위치만 기준으로 표시합니다.';
 if (locateBtn) locateBtn.addEventListener('click', handleLocate);
 if (addressSearchBtn) addressSearchBtn.addEventListener('click', handleAddressSearch);
 startBrowserTracking();
