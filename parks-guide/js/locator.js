@@ -306,16 +306,34 @@ const startBrowserTracking = () => {
 
   setStatus('현재 위치를 확인하는 중입니다. 브라우저의 위치 권한을 허용해주세요.');
 
+  const handlePosition = (latitude, longitude, message) => {
+    browserCoords = { lat: latitude, lon: longitude };
+    lastBrowserCoords = { lat: latitude, lon: longitude };
+    if (hintEl) hintEl.textContent = '브라우저 위치 기반으로 반경 2km 공원을 표시합니다. 지도 이동과 무관하게 현재 위치를 기준으로 유지합니다.';
+    if (parksHint) parksHint.textContent = '브라우저 위치 기준 추천 (반경 2km)';
+    loadAndRender(latitude, longitude, message || '현재 위치 기준으로 공원을 표시합니다.');
+  };
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      handlePosition(latitude, longitude, '현재 위치를 불러왔습니다.');
+    },
+    err => {
+      console.error(err);
+      const denied = err.code === 1;
+      setStatus(denied ? '위치 권한이 거부되었습니다. 주소 검색이나 프로필 위치를 사용하세요.' : '현재 위치를 가져올 수 없습니다. 네트워크 상태를 확인해주세요.', true);
+      if (hintEl) hintEl.textContent = '주소 검색 또는 프로필 위치로 공원을 불러올 수 있습니다.';
+    },
+    { enableHighAccuracy: true, maximumAge: 10000, timeout: 8000 }
+  );
+
   geoWatchId = navigator.geolocation.watchPosition(
     pos => {
       const { latitude, longitude } = pos.coords;
-      browserCoords = { lat: latitude, lon: longitude };
       const movedEnough = !lastBrowserCoords || haversine(lastBrowserCoords.lat, lastBrowserCoords.lon, latitude, longitude) > MIN_MOVE_FOR_FETCH_M;
       if (!movedEnough) return;
-      lastBrowserCoords = { lat: latitude, lon: longitude };
-      if (hintEl) hintEl.textContent = '브라우저 위치 기반으로 반경 2km 공원을 표시합니다. 지도 이동과 무관하게 현재 위치를 기준으로 유지합니다.';
-      if (parksHint) parksHint.textContent = '브라우저 위치 기준 추천 (반경 2km)';
-      loadAndRender(latitude, longitude, '현재 위치 기준으로 공원을 표시합니다.');
+      handlePosition(latitude, longitude);
     },
     err => {
       console.error(err);
