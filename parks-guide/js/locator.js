@@ -238,12 +238,19 @@ const fetchParks = async (lat, lon) => {
 // 기존 외부 산책로 fetch는 제거: 사용자 업로드 기반으로 동작
 
 const handleLocate = () => {
-  if (!profileCoords) {
-    setStatus('프로필 위치가 없습니다. 회원가입 시 입력한 위치를 사용합니다.', true);
+  if (browserCoords) {
+    const { lat, lon } = browserCoords;
+    loadAndRender(lat, lon, '현재 위치로 공원을 불러옵니다…');
     return;
   }
-  const { lat, lon } = profileCoords;
-  loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
+
+  if (profileCoords) {
+    const { lat, lon } = profileCoords;
+    loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
+    return;
+  }
+
+  setStatus('현재 위치를 가져오지 못했습니다. 위치 권한을 다시 확인하거나 주소 검색을 사용하세요.', true);
 };
 
 const geocodeAddress = async text => {
