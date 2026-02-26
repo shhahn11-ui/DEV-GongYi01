@@ -207,12 +207,12 @@ const renderProfile = (user, profileData) => {
   if (!user) {
     profileEmail.textContent = '로그인 필요';
     profileLocation.textContent = '-';
-    profileStatus.textContent = '로그인 후 위치를 관리할 수 있습니다.';
+    profileStatus.textContent = '로그인 후 위치를 저장할 수 있습니다.';
     return;
   }
   profileEmail.textContent = user.email || '익명';
   profileLocation.textContent = profileData?.location || '저장된 위치 없음';
-  profileStatus.textContent = '위치 수정 시 지도도 갱신됩니다.';
+  profileStatus.textContent = '저장된 위치는 프로필에만 표시됩니다.';
 };
 
 const updateAuthUI = user => {
@@ -265,9 +265,6 @@ const handleSignup = async () => {
     const coords = await geocodeLocation(locationText);
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     await saveProfile(cred.user, locationText, coords);
-    if (window.loadParksAtLocation) {
-      window.loadParksAtLocation(coords.lat, coords.lon);
-    }
     authStatus.textContent = '회원가입 및 로그인 완료';
     renderProfile(cred.user, { location: locationText, coords });
     await fetchTrails();
@@ -309,10 +306,7 @@ const handleProfileUpdate = async e => {
     const coords = await geocodeLocation(newLocation);
     await saveProfile(user, newLocation, coords);
     renderProfile(user, { location: newLocation, coords });
-    if (window.loadParksAtLocation) {
-      window.loadParksAtLocation(coords.lat, coords.lon);
-    }
-    profileStatus.textContent = '위치가 저장되고 지도가 갱신되었습니다.';
+    profileStatus.textContent = '위치가 저장되었습니다. 지도에는 현재 브라우저 위치만 사용합니다.';
   } catch (err) {
     console.error(err);
     profileStatus.textContent = '위치를 업데이트하지 못했습니다. 장소명을 다시 확인해주세요.';
@@ -372,14 +366,10 @@ onAuthStateChanged(auth, user => {
   updateAuthUI(user);
   if (user) {
     fetchTrails();
-    // 프로필 위치로 공원 불러오기
     getDoc(doc(profilesCol, user.uid)).then(snap => {
       if (snap.exists()) {
         const data = snap.data();
         renderProfile(user, data);
-        if (data?.coords?.lat && data?.coords?.lon && window.loadParksAtLocation) {
-          window.loadParksAtLocation(data.coords.lat, data.coords.lon);
-        }
       } else {
         renderProfile(user, null);
       }

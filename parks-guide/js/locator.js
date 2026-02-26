@@ -10,7 +10,6 @@ const addressSearchBtn = document.getElementById('address-search-btn');
 const parksGrid = document.getElementById('parks-list');
 const parksHint = document.getElementById('parks-hint');
 
-let profileCoords = null;
 let browserCoords = null;
 let lastBrowserCoords = null;
 let geoWatchId = null;
@@ -244,12 +243,6 @@ const handleLocate = () => {
     return;
   }
 
-  if (profileCoords) {
-    const { lat, lon } = profileCoords;
-    loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
-    return;
-  }
-
   setStatus('현재 위치를 가져오지 못했습니다. 위치 권한을 다시 확인하거나 주소 검색을 사용하세요.', true);
 };
 
@@ -352,9 +345,3 @@ hintEl.textContent = '위치 허용 시 현재 위치 기준 2km 공원을 자�
 if (locateBtn) locateBtn.addEventListener('click', handleLocate);
 if (addressSearchBtn) addressSearchBtn.addEventListener('click', handleAddressSearch);
 startBrowserTracking();
-
-// 외부에서 프로필 좌표를 설정하고 불러올 수 있도록 공개 함수 제공
-window.loadParksAtLocation = (lat, lon) => {
-  profileCoords = { lat, lon };
-  loadAndRender(lat, lon, '프로필 위치로 공원을 불러옵니다…');
-};
