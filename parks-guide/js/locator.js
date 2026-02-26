@@ -78,6 +78,34 @@ const ensureMap = (lat, lon) => {
   }
 };
 
+const updateCenterIndicator = (lat, lon) => {
+  if (!map) return;
+  if (!centerPin) {
+    centerPin = L.circleMarker([lat, lon], {
+      radius: 7,
+      color: '#2563eb',
+      weight: 2,
+      fillColor: '#2563eb',
+      fillOpacity: 0.9
+    }).addTo(map);
+  } else {
+    centerPin.setLatLng([lat, lon]);
+  }
+
+  if (!centerCircle) {
+    centerCircle = L.circle([lat, lon], {
+      radius: RADIUS_M,
+      color: '#2563eb',
+      weight: 1,
+      dashArray: '4 4',
+      fillColor: '#2563eb',
+      fillOpacity: 0.08
+    }).addTo(map);
+  } else {
+    centerCircle.setLatLng([lat, lon]);
+  }
+};
+
 const renderParks = (parks, centerLat, centerLon) => {
   listContainer.innerHTML = '';
   markersLayer.clearLayers();
@@ -254,6 +282,7 @@ const loadAndRender = (lat, lon, statusMessage) => {
   if (statusMessage) setStatus(statusMessage);
   skipNextMoveFetch = true;
   ensureMap(lat, lon);
+  updateCenterIndicator(lat, lon);
   fetchParks(lat, lon).catch(err => {
     console.error(err);
     setStatus('주변 공원 데이터를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.', true);
