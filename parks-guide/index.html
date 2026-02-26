@@ -81,6 +81,11 @@
                   <button type="button" id="locate-btn" class="btn primary">현재 위치로 보기</button>
                   <input id="address-input" type="text" placeholder="주소 · 아파트명 · 장소명 검색" aria-label="주소 검색">
                   <button type="button" id="address-search-btn" class="btn ghost">주소 검색</button>
+                  <div class="range-row">
+                    <label for="radius-slider">표시 반경</label>
+                    <input id="radius-slider" type="range" min="500" max="4000" step="100" value="2000" aria-label="표시 반경 조절">
+                    <span id="radius-value">2.0km</span>
+                  </div>
                 </div>
                 <p class="micro-copy" id="locator-status">위치 허용 시 현재 위치 기준 반경 2km 공원을 자동 표시합니다. 거부 시 주소 검색을 사용하세요.</p>
             </div>

@@ -9,6 +9,8 @@ const addressInput = document.getElementById('address-input');
 const addressSearchBtn = document.getElementById('address-search-btn');
 const parksGrid = document.getElementById('parks-list');
 const parksHint = document.getElementById('parks-hint');
+const radiusSlider = document.getElementById('radius-slider');
+const radiusValue = document.getElementById('radius-value');
 
 let browserCoords = null;
 let lastBrowserCoords = null;
@@ -25,6 +27,7 @@ const RADIUS_M = 2000;
 const MAX_PARKS = 20;
 const MIN_MOVE_FOR_FETCH_M = 25;
 const FETCH_ON_DRAG = false; // 지도 드래그 시 자동 재조회 여부
+let radiusMeters = RADIUS_M;
 
 const formatDistance = meters => {
   if (meters < 1000) return `${Math.round(meters)}m`;
@@ -95,7 +98,7 @@ const updateCenterIndicator = (lat, lon) => {
 
   if (!centerCircle) {
     centerCircle = L.circle([lat, lon], {
-      radius: RADIUS_M,
+      radius: radiusMeters,
       color: '#2563eb',
       weight: 1,
       dashArray: '4 4',
@@ -104,6 +107,7 @@ const updateCenterIndicator = (lat, lon) => {
     }).addTo(map);
   } else {
     centerCircle.setLatLng([lat, lon]);
+    centerCircle.setRadius(radiusMeters);
   }
 };
 
@@ -184,9 +188,9 @@ const fetchParks = async (lat, lon) => {
   const query = `
     [out:json][timeout:25];
     (
-      node["leisure"="park"]["sport"!~".*"](around:${RADIUS_M},${lat},${lon});
-      way["leisure"="park"]["sport"!~".*"](around:${RADIUS_M},${lat},${lon});
-      relation["leisure"="park"]["sport"!~".*"](around:${RADIUS_M},${lat},${lon});
+      node["leisure"="park"]["sport"!~".*"](around:${radiusMeters},${lat},${lon});
+      way["leisure"="park"]["sport"!~".*"](around:${radiusMeters},${lat},${lon});
+      relation["leisure"="park"]["sport"!~".*"](around:${radiusMeters},${lat},${lon});
     );
     out center ${MAX_PARKS};
   `;
@@ -229,7 +233,8 @@ const fetchParks = async (lat, lon) => {
     return;
   }
 
-  setStatus(`총 ${parks.length}개 공원 표시 (2km 반경, 거리순)`);
+  const kmText = radiusMeters >= 1000 ? `${(radiusMeters / 1000).toFixed(1)}km` : `${radiusMeters}m`;
+  setStatus(`총 ${parks.length}개 공원 표시 (${kmText} 반경, 거리순)`);
   renderParks(parks, lat, lon);
   renderTopParks(parks);
 };
@@ -345,3 +350,18 @@ hintEl.textContent = '위치 허용 시 현재 위치 기준 2km 공원을 자�
 if (locateBtn) locateBtn.addEventListener('click', handleLocate);
 if (addressSearchBtn) addressSearchBtn.addEventListener('click', handleAddressSearch);
 startBrowserTracking();
+
+if (radiusSlider && radiusValue) {
+  radiusValue.textContent = '2.0km';
+  radiusSlider.addEventListener('input', () => {
+    const val = Number(radiusSlider.value);
+    radiusMeters = val;
+    const km = val >= 1000 ? `${(val / 1000).toFixed(1)}km` : `${val}m`;
+    radiusValue.textContent = km;
+    if (centerCircle) centerCircle.setRadius(radiusMeters);
+    // 현재 위치 기준으로 다시 불러오기
+    if (browserCoords) {
+      loadAndRender(browserCoords.lat, browserCoords.lon, `${km} 반경으로 갱신합니다.`);
+    }
+  });
+}

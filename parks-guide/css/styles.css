@@ -570,6 +570,21 @@ body.locked footer {
   width: 100%;
 }
 
+.range-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.range-row input[type="range"] {
+  width: 100%;
+  accent-color: #2563eb;
+}
+
 .map-controls input {
   flex: 1;
   padding: 12px 14px;
