@@ -155,11 +155,11 @@
         loadProfile();
         loadStats();
       } else {
-        window.location.href = '../index.html';
+        window.location.href = '../';
       }
     });
 
-    enforceAuthPage('../index.html');
+    enforceAuthPage('../');
 
     const profileAlert = document.getElementById('profileAlert');
     const nicknameInput = document.getElementById('nicknameInput');
@@ -426,7 +426,7 @@
         await deleteUser(currentUser);
 
         alert('계정이 삭제되었습니다.');
-        window.location.href = '../index.html';
+        window.location.href = '../';
       } catch (error) {
         alert('계정 삭제 실패: ' + error.message);
       }
