@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TodoShare - 내 프로필</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
   <header>
@@ -123,9 +123,9 @@
   </main>
 
   <script type="module">
-    import { getCurrentUser, onAuthChange, getUserInfo, updateNickname } from './js/auth.js';
-    import { initializeHeader, enforceAuthPage } from './js/header.js';
-    import { db } from './js/firebase-config.js';
+    import { getCurrentUser, onAuthChange, getUserInfo, updateNickname } from '../js/auth.js';
+    import { initializeHeader, enforceAuthPage } from '../js/header.js';
+    import { db } from '../js/firebase-config.js';
     import {
       collection,
       getDocs,
@@ -155,11 +155,11 @@
         loadProfile();
         loadStats();
       } else {
-        window.location.href = 'index.html';
+        window.location.href = '../index/';
       }
     });
 
-    enforceAuthPage('index.html');
+    enforceAuthPage('../index/');
 
     const profileAlert = document.getElementById('profileAlert');
     const nicknameInput = document.getElementById('nicknameInput');
@@ -426,7 +426,7 @@
         await deleteUser(currentUser);
 
         alert('계정이 삭제되었습니다.');
-        window.location.href = 'index.html';
+        window.location.href = '../index/';
       } catch (error) {
         alert('계정 삭제 실패: ' + error.message);
       }

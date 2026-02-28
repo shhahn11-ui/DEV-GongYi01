@@ -8,9 +8,9 @@
   <meta name="apple-mobile-web-app-title" content="TodoShare">
   <meta name="theme-color" content="#667eea">
   <title>TodoShare - 개인 리스트</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     .status-row {
       display: grid;
@@ -928,9 +928,9 @@
   </main>
 
   <script type="module">
-    import { getCurrentUser, onAuthChange } from './js/auth.js';
-    import { initializeHeader, enforceAuthPage } from './js/header.js';
-    import { db } from './js/firebase-config.js';
+    import { getCurrentUser, onAuthChange } from '../js/auth.js';
+    import { initializeHeader, enforceAuthPage } from '../js/header.js';
+    import { db } from '../js/firebase-config.js';
     import {
       collection,
       addDoc,
@@ -1000,11 +1000,11 @@
         setupHamburgerMenu(); // 햄버거 메뉴 초기화
         loadWeather();
       } else {
-        window.location.href = 'index.html';
+        window.location.href = '../index/';
       }
     });
 
-    enforceAuthPage('index.html');
+    enforceAuthPage('../index/');
 
     const todoInput = document.getElementById('todoInput');
     const todoDate = document.getElementById('todoDate');

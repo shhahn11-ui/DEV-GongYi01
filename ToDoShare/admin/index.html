@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TodoShare - 관리자탭</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     body.loading {
       opacity: 0;
@@ -180,9 +180,9 @@
   </main>
 
   <script type="module">
-    import { initializeHeader, enforceAuthPage, isAdminUser } from './js/header.js';
-    import { onAuthChange } from './js/auth.js';
-    import { db } from './js/firebase-config.js';
+    import { initializeHeader, enforceAuthPage, isAdminUser } from '../js/header.js';
+    import { onAuthChange } from '../js/auth.js';
+    import { db } from '../js/firebase-config.js';
     import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js';
 
     enforceAuthPage();
@@ -303,13 +303,13 @@
 
     onAuthChange((user) => {
       if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '../index/';
         return;
       }
 
       if (!isAdminUser(user)) {
         alert('관리자만 접근할 수 있습니다.');
-        window.location.href = 'dashboard.html';
+        window.location.href = '../dashboard/';
         return;
       }
 

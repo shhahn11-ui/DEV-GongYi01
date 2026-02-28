@@ -1,6 +1,15 @@
 import { getCurrentUser, logout, onAuthChange } from './auth.js';
 
 const ADMIN_EMAIL = 'shhahn11@gmail.com';
+const ROUTES = Object.freeze({
+  index: '../index/',
+  signup: '../signup/',
+  dashboard: '../dashboard/',
+  sharedLists: '../shared-lists/',
+  profile: '../profile/',
+  admin: '../admin/'
+});
+const KNOWN_ROUTE_KEYS = new Set(['index', 'signup', 'dashboard', 'shared-lists', 'profile', 'admin']);
 
 export function isAdminUser(user = getCurrentUser()) {
   return Boolean(user?.email && user.email.toLowerCase() === ADMIN_EMAIL);
@@ -21,13 +30,13 @@ export function initializeHeader() {
   if (currentUser) {
     // 로그인된 상태
     const navItems = [
-      { text: '개인 리스트', href: 'dashboard.html' },
-      { text: '리스트 공유', href: 'shared-lists.html' },
-      { text: '내 프로필', href: 'profile.html' }
+      { text: '개인 리스트', href: ROUTES.dashboard },
+      { text: '리스트 공유', href: ROUTES.sharedLists },
+      { text: '내 프로필', href: ROUTES.profile }
     ];
 
     if (isAdminUser(currentUser)) {
-      navItems.splice(2, 0, { text: '관리자탭', href: 'admin.html' });
+      navItems.splice(2, 0, { text: '관리자탭', href: ROUTES.admin });
     }
 
     navItems.forEach(item => {
@@ -53,7 +62,7 @@ export function initializeHeader() {
     logoutBtn.addEventListener('click', async () => {
       try {
         await logout();
-        window.location.href = 'index.html';
+        window.location.href = ROUTES.index;
       } catch (error) {
         alert('로그아웃 실패: ' + error.message);
       }
@@ -64,7 +73,7 @@ export function initializeHeader() {
     // 로그인되지 않은 상태
     const loginLi = document.createElement('li');
     const loginA = document.createElement('a');
-    loginA.href = 'index.html';
+    loginA.href = ROUTES.index;
     loginA.className = 'auth-link';
     loginA.textContent = '로그인';
     loginLi.appendChild(loginA);
@@ -72,7 +81,7 @@ export function initializeHeader() {
 
     const signupLi = document.createElement('li');
     const signupA = document.createElement('a');
-    signupA.href = 'signup.html';
+    signupA.href = ROUTES.signup;
     signupA.className = 'auth-link';
     signupA.textContent = '회원가입';
     signupLi.appendChild(signupA);
@@ -82,26 +91,24 @@ export function initializeHeader() {
 
 export function checkAuthAndRedirect() {
   const currentUser = getCurrentUser();
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const publicPages = ['index.html', 'signup.html'];
+  const routeKey = getCurrentRouteKey();
+  const publicRoutes = ['index', 'signup'];
 
-  if (!currentUser && !publicPages.includes(currentPage)) {
-    // 로그인하지 않았는데 보호된 페이지 접근
-    window.location.href = 'index.html';
+  if (!currentUser && !publicRoutes.includes(routeKey)) {
+    window.location.href = ROUTES.index;
   }
 
-  if (currentUser && (currentPage === 'index.html' || currentPage === 'signup.html')) {
-    // 이미 로그인했는데 인증 페이지 접근
-    window.location.href = 'dashboard.html';
+  if (currentUser && publicRoutes.includes(routeKey)) {
+    window.location.href = ROUTES.dashboard;
   }
 
-  if (currentUser && currentPage === 'admin.html' && !isAdminUser(currentUser)) {
-    window.location.href = 'dashboard.html';
+  if (currentUser && routeKey === 'admin' && !isAdminUser(currentUser)) {
+    window.location.href = ROUTES.dashboard;
   }
 }
 
 // 보호된 페이지에서 사용: 로그인 없으면 로그인 페이지로 이동
-export function enforceAuthPage(redirectTo = 'index.html') {
+export function enforceAuthPage(redirectTo = ROUTES.index) {
   const currentUser = getCurrentUser();
   if (currentUser) return;
 
@@ -110,4 +117,31 @@ export function enforceAuthPage(redirectTo = 'index.html') {
       window.location.href = redirectTo;
     }
   });
+}
+
+function getCurrentRouteKey() {
+  const path = window.location.pathname.replace(/\\/g, '/');
+  const segments = path.split('/').filter(Boolean).map(segment => segment.toLowerCase());
+
+  if (!segments.length) {
+    return 'index';
+  }
+
+  let last = segments[segments.length - 1];
+
+  if (last === 'index.html') {
+    const prev = segments[segments.length - 2] || '';
+    return KNOWN_ROUTE_KEYS.has(prev) ? prev : 'index';
+  }
+
+  if (KNOWN_ROUTE_KEYS.has(last)) {
+    return last;
+  }
+
+  if (last.endsWith('.html')) {
+    const candidate = last.replace(/\.html$/, '');
+    return KNOWN_ROUTE_KEYS.has(candidate) ? candidate : 'index';
+  }
+
+  return KNOWN_ROUTE_KEYS.has(last) ? last : 'index';
 }
