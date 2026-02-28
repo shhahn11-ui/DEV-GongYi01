@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TodoShare - 로그인</title>
-  <link rel="icon" href="../favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="../favicon.png">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="./favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./favicon.png">
+  <link rel="stylesheet" href="./css/styles.css">
   <style>
     body.loading {
       opacity: 0;
@@ -44,13 +44,13 @@
       </form>
       <div class="form-toggle">
         아직 계정이 없으신가요? 
-        <a href="../signup/">회원가입</a>
+        <a href="./signup/">회원가입</a>
       </div>
     </div>
   </div>
 
   <script type="module">
-    import { login, onAuthChange } from '../js/auth.js';
+    import { login, onAuthChange } from './js/auth.js';
 
     // Firebase 인증 초기화 완료 대기
     let initialized = false;
@@ -61,7 +61,7 @@
         
         if (user) {
           // 이미 로그인된 상태 - 대시보드로 이동
-          window.location.href = '../dashboard/';
+          window.location.href = './dashboard/';
         } else {
           // 미로그인 상태 - 로그인 페이지 표시
           document.body.classList.remove('loading');
@@ -83,7 +83,7 @@
         await login(email, password);
         alertMessage.innerHTML = '<div class="alert alert-success">로그인 성공! 리디렉션 중...</div>';
         setTimeout(() => {
-          window.location.href = '../dashboard/';
+          window.location.href = './dashboard/';
         }, 1000);
       } catch (error) {
         let errorMessage = '로그인 실패했습니다.';

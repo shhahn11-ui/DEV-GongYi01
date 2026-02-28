@@ -2,7 +2,7 @@ import { getCurrentUser, logout, onAuthChange } from './auth.js';
 
 const ADMIN_EMAIL = 'shhahn11@gmail.com';
 const ROUTES = Object.freeze({
-  index: '../index/',
+  index: '../index.html',
   signup: '../signup/',
   dashboard: '../dashboard/',
   sharedLists: '../shared-lists/',
