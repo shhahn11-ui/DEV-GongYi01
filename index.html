@@ -1,12 +1,125 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>한시형 PortFoilo</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="aos.css">
 </head>
 <body>
-    <div style="width: 440px; height: 56px; background: #D9D9D9; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)"></div>
-    <div style="width: 265px; height: 60px; background: #D9D9D9; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)"></div>
+    <script src="aos.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
+
+
+    <section class="Start">
+        <h1 data-aos="fade-up">GongYi01.net</h1>
+        <p data-aos="fade-up">GongYi01's PortFolio</p>
+        <div data-aos="fade-up">
+            <button>작품 보러가기</button>
+        </div>  
+    </section>
+    <section class="welcome">
+            <h1 data-aos="flip-left">HELLO<br> WORLD!</h1>
+            <p data-aos="flip-right">저의 포트폴리오를 시작합니다<br> 스크롤 해주세요!</p>
+    </section>
+    <section class="about">
+        <h2>About Me</h2>
+        <div data-aos-duration="1000" data-aos="fade-up"><p>풀스택 개발자를 꿈꾸며 코드를 두드리는 학생입니다.<br><br>에러를 만나면 당황하기보다<br>왜 발생했는지 분석하는 걸 더 즐깁니다.<br><br>기능 구현에 그치지 않고,<br>실제로 동작하는 서비스를 만드는 개발자가 되는 것이 <br> 목표입니다.</p></div>
+        <img src="./img/image-2.png" alt="" class="img1">
+        <img src="./img/image-3.png" alt="" class="img2">
+        <img src="./img/image-4.png" alt="" class="img3">
+        <img src="./img/image-5.png" alt="" class="img4">
+        <img src="./img/image-6.png" alt="" class="img5">
+    </section>
+    <section class="skills">
+        <h2>Skills</h2>
+        <img src="./img/image-2.png" alt="" class="img1-skills">
+        <img src="./img/image-4.png" alt="" class="img2-skills">
+        <img src="./img/image-3.png" alt="" class="img3-skills">
+        <p data-aos-duration="1000" data-aos="fade-right" class="skill-web">HTML, CSS, JavaScript 기반의 반응형 웹 페이지 제작 경험 보유</p>
+        <img src="./img/image-5.png" alt="" class="img4-skills">
+        <img src="./img/image-6.png" alt="" class="img5-skills">
+        <p data-aos-duration="1000" data-aos="fade-left" class="skill-py-c">Python, C 등 다양한 프로그래밍 언어에 대한 이해와 활용 능력 보유</p>
+    </section>
+    <section class="hobbies">
+        <img src="./img/image 12.png" alt="" class="img1-hobbies">
+        <div class="printer" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <p>3D 프린터를 활용해 직접 설계한 모델을<br> 제작하며 아이디어를 실제 결과물로 구현하는 <br>과정을 경험했습니다. 설계 → 수정 → 출력 → <br>개선의 반복을 통해 문제 해결 능력을 기르고 <br>있습니다.</p>
+        </div>
+        <div class="telescope" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <p>천체 망원경을 활용해 행성 관측 및 촬영을 <br>진행하며 광학 원리와 거리·빛의 특성을 <br>탐구했습니다. 관측 데이터를 정리하며 패턴 <br>분석과 기록 습관을 기르고 있습니다.</p>
+        </div>
+        <img src="./img/image 13.png" alt="" class="img2-hobbies">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="154" viewBox="0 0 1920 154" fill="none">
+            <path d="M1.00006 74.5C109.5 118.5 213.5 130 294.5 130C375.5 130 480 74.5 569.5 74.5C659 74.5 805.5 105 897 105C988.5 105 1226 0.000109613 1515.5 1.74974e-10C1805 -0.000109612 1895.5 51.5 1917 74.5C1938.5 97.5 1917 154.5 1917 154.5L1.00006 179.5C1.00006 179.5 -107.5 30.5002 1.00006 74.5Z" fill="#161721"/>
+        </svg>
+        </section>
+        <section class="projects">
+            <h2>Projects</h2>
+            <div class="card" data-aos = "fade-left" data-aos-anchor-placement="top-bottom">
+                <img class="card-image" src="./img/image 14.png" />
+
+                <div class="box-large"></div>
+                <div class="box-small"></div>
+
+                <div class="title">
+                    ToDoShare<br/><br/>
+                </div>
+                
+                <div class="link">
+                    <a href="https://gongyi01.net/ToDoShare/">www.GongYi01.net/ToDoShare/</a>
+                </div>
+
+                <div class="subtitle">
+                    계계 공유 웹 서비스 - 계획을 짜고 <br/>공유하세요!
+                </div>
+
+                <div class="description">
+                    계획에 영향을 미치는 세울 조언과 날씨를<br/>
+                    보여주어 시간 관리를 돕는 실시간 할 일 공유<br/>
+                    플랫폼입니다<br/><br/>
+                    Firebase의 실시간 데이터베이스를 활용해 <br/>
+                    팀원 간 할 일을 즉각적으로 공유하고 소통하는 <br/>
+                    협업 플랫폼입니다
+                </div>
+            </div>
+            <div class="card2" data-aos = "fade-right" data-aos-anchor-placement="top-bottom">
+                <img class="card2-image" src="./img/image 15.png" />
+
+                <div class="box2-large"></div>
+                <div class="box2-small"></div>
+
+            <div class="card2-title">
+                    parks-guide<br/><br/>
+                </div>
+
+                <div class="card2-link">
+                    <a href="https://gongyi01.net/parks-guide/">www.GongYi01.net/parks-guide/</a>
+                </div>
+
+                <div class="card2-subtitle">
+                    주변 공원 찾기 서비스 - 나만의 산책로를 <br/>
+                    개발하고 자랑해보세요!
+            </div>
+
+                <div class="card2-description">
+                    위치 서비스와 지도 서비스를 사용하여 사용자의 <br/>
+                    주변 공원을 찾아주는 플랫폼입니다<br/><br/>
+                    위치를 선택해서 그 주변 공원도 찾을 수 있습니다<br/>
+                    산책/등산을 위한 준비물고 추천해줍니다
+                </div>
+            </div>   
+            <div class="divider"></div>  
+            <div class="contact-text">
+                contact : shhahn11@gmail.com
+            </div>
+        </section> 
 </body>
 </html>
