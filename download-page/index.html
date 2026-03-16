@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GongYi 매크로 키보드 다운로드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">GY</div>
+      <div class="loader-spinner"></div>
+      <p class="loader-text">로딩 중...</p>
+    </div>
+  </div>
+  <div class="bg-shapes" aria-hidden="true">
+    <span class="shape shape-a"></span>
+    <span class="shape shape-b"></span>
+    <span class="shape shape-c"></span>
+    <span class="shape shape-d"></span>
+  </div>
+  <div class="page">
+    <header class="top-bar reveal-down">
+      <div class="brand">
+        <div class="logo">GY</div>
+        <div class="name">
+          <span class="title">GongYi</span>
+          <span class="subtitle">아두이노 매크로 키보드 빌드</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="hero">
+      <div class="copy reveal-scale stagger-children">
+        <p class="eyebrow">매크로 키보드 · 최신 안정 빌드</p>
+        <h1>아두이노 매크로 키보드 <br>펌웨어 다운로드</h1>
+        <p class="lede">
+          키 매핑, 매크로까지 포함한 빌드 패키지입니다. 아두이노 보드에 바로 플래싱하고 테스트하세요.
+        </p>
+        <div class="cta-row">
+          <a class="button primary" href="files/Macro-KeyBoard-v1.zip" download>
+            <span>매크로 키보드 v1</span>
+            <small>ZIP · 64.3 MB</small>
+          </a>
+          <a class="button ghost" href="#steps">설치 방법</a>
+        </div>
+        <div class="meta">
+          <span class="pill">용량: 64.3 MB</span>
+          <span class="pill">업데이트: 오늘</span>
+          <span class="pill">SHA-256: B570580A...</span>
+        </div>
+      </div>
+
+      <div class="card reveal-right" aria-hidden="true">
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="label">릴리즈 패키지</span>
+            <span class="dot"></span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <span>파일</span>
+              <strong>Macro-KeyBoard-v1.zip</strong>
+            </div>
+            <div class="row">
+              <span>채널</span>
+              <strong>안정 채널</strong>
+            </div>
+            <div class="row">
+              <span>체크섬</span>
+              <strong>B570580A...</strong>
+            </div>
+            <div class="row">
+              <span>서명</span>
+              <strong>확인됨</strong>
+            </div>
+          </div>
+          <div class="card-footer">공유 및 설치 준비 완료</div>
+        </div>
+      </div>
+    </main>
+
+    <section id="downloads" class="section reveal-left">
+      <div class="section-head">
+        <h2>파일 다운로드</h2>
+        <p>현재 올려둔 아두이노 매크로 키보드 관련 파일 목록입니다.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="file-table">
+          <thead>
+            <tr>
+              <th>파일명</th>
+              <th>크기</th>
+              <th>SHA-256 (짧게)</th>
+              <th>다운로드</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Macro-KeyBoard-v1.zip</td>
+              <td>64.3 MB</td>
+              <td>B570580A...</td>
+              <td><a class="text-link" href="files/Macro-KeyBoard-v1.zip" download>ZIP 받기</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="hash-note">전체 SHA-256: B570580A0B02E4EF98D3A84DAB406D22D3BDA0A70CD418A3FD4A7693BC9206C4</p>
+      </div>
+    </section>
+
+    <section id="steps" class="section reveal">
+      <div class="section-head">
+        <h2>3단계 설치</h2>
+        <p>다운로드한 매크로 키보드 빌드를 보드에 올리고 테스트하려면 다음 단계를 따라주세요.</p>
+      </div>
+      <div class="grid stagger-children">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>다운로드</h3>
+          <p>위 다운로드 버튼을 눌러 ZIP을 저장한 뒤, 압축을 해제합니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>플래싱 준비</h3>
+          <p>Arduino IDE에서 보드를 선택하고, 라이브러리를 맞춘 뒤 스케치를 열어 확인합니다. 필요하면 체크섬으로 파일 무결성을 검증하세요.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>업로드 및 테스트</h3>
+          <p>보드에 업로드한 뒤, 매크로 키 동작과 키맵이 원하는 대로 작동하는지 테스트합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="usage" class="section reveal-right">
+      <div class="section-head">
+        <h2>사용법</h2>
+        <p>Macro-KeyBoard를 다운로드 하고 dist 폴더를 열어 exe 실행파일을 실행하세요.</p>
+      </div>
+      <ul class="usage-list">
+        <li><strong>시리얼 연결</strong>: 보드를 USB로 연결하면 Python 유틸이 자동으로 포트를 탐색합니다.</li>
+        <li><strong>키맵 수정</strong>: 프로그램에서 KEY-1~4 입력값을 원하는 단축키 또는 문자열로 변경 후 저장하세요.</li>
+        <li><strong>입력 전송</strong>: 보드에서 스위치를 누르면 시리얼로 KEY-1~4 신호를 보내고, Python 유틸이 설정된 단축키를 실행합니다.</li>
+        <li><strong>붙여넣기 모드</strong>: 단축키 구분자가 없으면 문자열로 판단해 클립보드에 복사 후 자동 붙여넣기를 수행합니다.</li>
+        <li><strong>재연결</strong>: 연결이 끊기면 상태 표시줄에 안내가 뜨며, 케이블을 다시 연결하면 자동으로 재시도합니다.</li>
+      </ul>
+    </section>
+
+    <section id="code" class="section reveal-left">
+      <div class="section-head">
+        <h2>코드 스니펫</h2>
+        <p>직접 작성한 파이썬 스크립트나 아두이노 스케치를 아래에 붙여 넣어 공유하세요.</p>
+      </div>
+      <div class="code-grid">
+        <div class="code-panel">
+          <div class="code-header">Arduino 스케치 (.ino)</div>
+          <pre><code>void setup() {
+  Serial.begin(9600);
+
+  // D3, D5, D7 핀을 가공 GND로 설정
+  pinMode(3, OUTPUT); digitalWrite(3, LOW); 
+  pinMode(5, OUTPUT); digitalWrite(5, LOW); 
+  pinMode(7, OUTPUT); digitalWrite(7, LOW); 
+
+  // 버튼 설정 (D2, D4, D6, D8)
+  pinMode(2, INPUT_PULLUP); // KEY-4 신호 전송
+  pinMode(4, INPUT_PULLUP); // KEY-3 신호 전송
+  pinMode(6, INPUT_PULLUP); // KEY-2 신호 전송
+  pinMode(8, INPUT_PULLUP); // KEY-1 신호 전송
+}
+
+void loop() {
+  // KEY-4 (D2)
+  if (digitalRead(2) == LOW) {
+    delay(20); // 첫 번째 떨림 방지
+    if (digitalRead(2) == LOW) {
+      Serial.println("KEY-4");
+      while(digitalRead(2) == LOW); // 뗄 때까지 대기
+      delay(20); // 뗄 때 발생하는 떨림 방지
+    }
+  }
+
+  // KEY-3 (D4)
+  if (digitalRead(4) == LOW) {
+    delay(20);
+    if (digitalRead(4) == LOW) {
+      Serial.println("KEY-3");
+      while(digitalRead(4) == LOW);
+      delay(20);
+    }
+  }
+
+  // KEY-2 (D6)
+  if (digitalRead(6) == LOW) {
+    delay(20);
+    if (digitalRead(6) == LOW) {
+      Serial.println("KEY-2");
+      while(digitalRead(6) == LOW);
+      delay(20);
+    }
+  }
+
+  // KEY-1 (D8)
+  if (digitalRead(8) == LOW) {
+    delay(20);
+    if (digitalRead(8) == LOW) {
+      Serial.println("KEY-1");
+      while(digitalRead(8) == LOW);
+      delay(20);
+    }
+  }
+}
+</code></pre>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">Python 유틸</div>
+          <pre><code>import tkinter as tk
+from tkinter import messagebox
+import serial
+import serial.tools.list_ports
+import pyautogui
+import pyperclip 
+import threading
+import json
+import os
+import time
+
+CONFIG_FILE = "macro_settings.json"
+
+class MacroApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("매크로 패드 설정 프로그램")
+        self.root.geometry("400x550")
+        self.root.configure(bg="#1e1e1e")
+
+        # 스타일 설정
+        self.accent_color = "#0078d4"
+        self.bg_color = "#1e1e1e"
+        self.card_color = "#2d2d2d"
+
+        # 기본 설정값 유지 (한시형 님 요청 사항)
+        self.default_settings = {
+            "KEY-1": "ctrl,a", # 전체선택
+            "KEY-2": "ctrl,c", # 복사
+            "KEY-3": "ctrl,v", # 붙여넣기
+            "KEY-4": "ctrl,z"  # 되돌리기
+        }
+        self.settings = self.load_settings()
+
+        # 헤더
+        header = tk.Frame(root, bg=self.accent_color, height=80)
+        header.pack(fill="x")
+        tk.Label(header, text="나노 매크로 패드", font=("Malgun Gothic", 16, "bold"), bg=self.accent_color, fg="white").pack(pady=20)
+
+        # 입력 영역
+        self.main_frame = tk.Frame(root, bg=self.bg_color)
+        self.main_frame.pack(pady=20, padx=30, fill="both", expand=True)
+
+        self.entries = {}
+        for key in ["KEY-1", "KEY-2", "KEY-3", "KEY-4"]:
+            row = tk.Frame(self.main_frame, bg=self.bg_color)
+            row.pack(fill="x", pady=10)
+            
+            tk.Label(row, text=key, font=("Malgun Gothic", 10, "bold"), bg=self.bg_color, fg=self.accent_color, width=8, anchor="w").pack(side="left")
+            
+            entry = tk.Entry(row, bg=self.card_color, fg="white", insertbackground="white", 
+                             relief="flat", font=("Consolas", 11), borderwidth=8)
+            # 설정 파일이 있으면 가져오고, 없으면 기본값 사용
+            entry.insert(0, self.settings.get(key, self.default_settings[key]))
+            entry.pack(side="right", fill="x", expand=True)
+            self.entries[key] = entry
+
+        # 저장 버튼
+        self.save_btn = tk.Button(root, text="설정 저장하기", command=self.save_settings, 
+                                  bg=self.accent_color, fg="white", font=("Malgun Gothic", 10, "bold"),
+                                  relief="flat", padx=20, pady=10, cursor="hand2")
+        self.save_btn.pack(pady=20)
+
+        # 상태 바
+        self.status_frame = tk.Frame(root, bg="#2d2d2d", height=30)
+        self.status_frame.pack(fill="x", side="bottom")
+        self.status_label = tk.Label(self.status_frame, text="장치를 찾는 중...", 
+                                     font=("Malgun Gothic", 9), bg="#2d2d2d", fg="#aaaaaa")
+        self.status_label.pack(pady=5)
+
+        self.running = True
+        self.thread = threading.Thread(target=self.serial_loop, daemon=True)
+        self.thread.start()
+
+    def load_settings(self):
+        if os.path.exists(CONFIG_FILE):
+            try:
+                with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except: return self.default_settings
+        return self.default_settings
+
+    def save_settings(self):
+        for key in self.entries:
+            self.settings[key] = self.entries[key].get().strip()
+        with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+            json.dump(self.settings, f)
+        messagebox.showinfo("저장 완료", "설정이 저장되었습니다!")
+
+    def serial_loop(self):
+        while self.running:
+            target_port = None
+            for p in serial.tools.list_ports.comports():
+                if any(x in p.description.upper() for x in ['USB', 'CH340', 'ARDUINO', 'SERIAL']):
+                    target_port = p.device
+                    break
+            
+            if target_port:
+                try:
+                    with serial.Serial(target_port, 9600, timeout=0.1) as ser:
+                        ser.dtr = False
+                        time.sleep(0.1)
+                        ser.dtr = True
+                        self.status_label.config(text=f"연결됨: {target_port}", fg="#4caf50")
+                        while self.running:
+                            if ser.in_waiting > 0:
+                                line = ser.readline().decode('utf-8', errors='ignore').strip()
+                                if line in self.settings:
+                                    cmd_raw = self.settings[line]
+                                    if ',' in cmd_raw:
+                                        cmd_keys = cmd_raw.split(',')
+                                        pyautogui.hotkey(*cmd_keys)
+                                    else:
+                                        pyperclip.copy(cmd_raw)
+                                        pyautogui.hotkey('ctrl', 'v')
+                            time.sleep(0.01)
+                except:
+                    self.status_label.config(text="연결 끊김. 재시도 중...", fg="#f44336")
+            else:
+                self.status_label.config(text="장치를 찾을 수 없습니다.", fg="#f44336")
+            time.sleep(1)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = MacroApp(root)
+    root.mainloop()
+
+</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.classList.add('loader-hide');
+        loader.addEventListener('transitionend', () => loader.remove());
+      }, 3000);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-down').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Parallax on background shapes
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          const shapes = document.querySelectorAll('.shape');
+          const speeds = [0.03, -0.02, 0.025, -0.015];
+          shapes.forEach((s, i) => {
+            s.style.transform = `translate3d(0, ${y * speeds[i]}px, 0) scale(${1 + Math.sin(y * 0.002) * 0.03})`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Stagger children animation
+    const staggerObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const children = entry.target.children;
+          Array.from(children).forEach((child, i) => {
+            child.style.transitionDelay = `${i * 250}ms`;
+            child.classList.add('child-visible');
+          });
+          staggerObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.stagger-children').forEach((el) => {
+      Array.from(el.children).forEach((child) => {
+        child.classList.add('stagger-child');
+      });
+      staggerObs.observe(el);
+    });
+  </script>
+</body>
+</html>
