@@ -214,3 +214,226 @@ section.scroll {
         transform: translateX(-50%);
     }
 }
+
+.about {
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(50% 50% at 50% 50%, #130C3A 0%, #000 100%);
+}
+
+.about .img {
+    width: 30vw;
+    height: 75vh;
+    border-radius: 49px;
+    border: 3px solid #5C99F5;
+    background: linear-gradient(157deg, rgba(12, 4, 29, 0.00) 3.97%, rgba(24, 28, 103, 0.00) 82.72%);
+    position: relative;
+    left: 11%;
+    top: -63%;
+    z-index: 1;
+}
+
+.about .profile {
+    width: 30vw;
+    height: 75vh;
+    border-radius: 49px;
+    background: linear-gradient(157deg, #0C041D 3.97%, #181C67 82.72%);
+    position: relative;
+    top: 10%;
+    left: 10%;
+    z-index: 2;
+}
+
+.about .profile img {
+    position: relative;
+    top: 2%;
+    left: 3%;
+}
+
+.about-title {
+    color: #5073FF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.88px;
+    position: relative;
+    top: -118%;
+    left: -3%;
+}
+
+.about-intro {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 5vh;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    position: relative;
+    top: -118%;
+    left: 4.5%;
+}
+
+.about p {
+    color: #c0c0c0;
+    font-family: Pretendard;
+    font-size: 2.5vh;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    position: relative;
+    top: -114%;
+    left: 44%;
+    opacity: 0;
+}
+
+.about p strong {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.skills {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+
+.skills-title {
+    color: #5073FF;
+    font-family: Pretendard;
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.88px;
+    position: relative;
+    top: 7%;
+    left: 10%;
+} 
+
+.skills-intro {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 6vh;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    position: relative;
+    top: 7%;
+    left: 10%;
+}
+
+.Frontend{
+    position: relative;
+    background-color: #000000;
+    width: 70vw;
+    height: 7vh;
+    left: 14%;
+    top: 10%;
+}
+
+.Backend{
+    position: relative;
+    background-color: #000000;
+    width: 70vw;
+    height: 7vh;
+    left: 14%;
+    top: 13%;
+}
+
+.Engineering{
+    position: relative;
+    background-color: #000000;
+    width: 70vw;
+    height: 7vh;
+    left: 14%;
+    top: 16%;
+}
+
+.tools{
+    position: relative;
+    background-color: #000000;
+    width: 70vw;
+    height: 7vh;
+    left: 14%;
+    top: 19%;
+}
+
+.skill-h3 {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: relative;
+}
+
+.skill-p {
+    color: #888;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 259px;
+    height: 15px;
+    position: relative;
+    top: -40%;
+    left: 40%;
+}
+
+.bar {
+    width: 1370px;
+    height: 1px;
+    background: #575757;
+    position: relative;
+    top: 20%;
+}
+
+.skill-list {
+    position: relative;
+    top: 5%;
+    height: 80vh;
+}
+
+.level {
+    background-color: #131313;
+    width: 21vw;
+    height: 0.5vh;
+    position: relative;
+    border-radius: 5px;
+    top: -50%;
+    left: 70%;
+    z-index: 1;
+}
+
+.level-value {
+    background-color: #0051C9;
+    height: 0.5vh;
+    position: relative;
+    border-radius: 5px;
+    top: -56%;
+    left: 70%;
+    z-index: 2;
+}
+
+#value-front {
+    width: 15vw;
+}
+
+#value-back {
+    width: 12vw;
+}
+
+#value-engineering {
+    width: 18vw;
+}
+
+#value-tools {
+    width: 16vw;
+}
