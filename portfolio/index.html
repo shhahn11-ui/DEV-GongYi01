@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <section class="start">
@@ -72,6 +73,9 @@
             </div>
         </div>
     </section>
+    <section class="motive">
+        <h1 class="motive-title">혁신을 위한 코드,<br> 사용자 경험을 위한 설계</h1>
+    </section>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -97,7 +101,74 @@
         }
         });
 
-        
+        gsap.to("#value-front", {
+        width: "15vw",
+        y: 0, // 원래 위치로 내려옴
+        duration: 1,
+        scrollTrigger: {
+            trigger: "#value-front",
+            start: "top 80%",
+            toggleActions: "play none none none"
+        }
+        });
+
+        gsap.to("#value-back", {
+        width: "9vw",
+        y: 0, // 원래 위치로 내려옴
+        duration: 1,
+        scrollTrigger: {
+            trigger: "#value-back",
+            start: "top 80%",
+            toggleActions: "play none none none"
+        }
+        });
+
+        gsap.to("#value-engineering", {
+        width: "18vw",
+        y: 0, // 원래 위치로 내려옴
+        duration: 1,
+        scrollTrigger: {
+            trigger: "#value-engineering",
+            start: "top 80%",
+            toggleActions: "play none none none"
+        }
+        });
+
+        gsap.to("#value-tools", {
+        width: "16vw",
+        y: 0, // 원래 위치로 내려옴
+        duration: 1,
+        scrollTrigger: {
+            trigger: "#value-tools",
+            start: "top 80%",
+            toggleActions: "play none none none"
+        }
+        });
+
+        // 1. GSAP 플러그인 등록
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 2. 텍스트 분리 (SplitType)
+       // 1. 텍스트 분리 (lines를 제외하고 words만 추출)
+        const motiveText = new SplitType('.motive-title', { 
+            types: 'words',
+            tagName: 'span' 
+        });
+
+        // 2. 애니메이션
+        gsap.to(motiveText.words, {
+            opacity: 1,
+            stagger: 0.2, // 숫자를 높일수록 한 단어씩 확실히 구분되어 밝아집니다
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: ".motive",
+                start: "top top",
+                end: "+=1500", // 스크롤 길이를 충분히 주면 한 단어씩 천천히 바뀝니다
+                scrub: true,
+                pin: true,
+            }
+        });
+    
     </script>
 </body>
 </html>
