@@ -101,6 +101,7 @@
         }
         });
 
+        /* 모바일 여부 확인 (CSS @media (max-width: 768px) 와 동일한 기준) */
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const skillW = isMobile
             ? { front: "43vw", back: "26vw", engineering: "51vw", tools: "46vw" }

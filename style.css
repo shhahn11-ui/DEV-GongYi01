@@ -606,7 +606,7 @@ section.scroll {
     }
 
     .level {
-        width: 60vw;
+        width: 60vw; /* 모바일 트랙 너비 (데스크톱 21vw 대비 넓게 설정) */
         left: 0;
         top: -40%;
     }
