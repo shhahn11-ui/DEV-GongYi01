@@ -101,8 +101,14 @@
         }
         });
 
+        /* 모바일 여부 확인 (CSS @media (max-width: 768px) 와 동일한 기준) */
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const skillW = isMobile
+            ? { front: "43vw", back: "26vw", engineering: "51vw", tools: "46vw" }
+            : { front: "15vw", back: "9vw",  engineering: "18vw", tools: "16vw" };
+
         gsap.to("#value-front", {
-        width: "15vw",
+        width: skillW.front,
         y: 0, // 원래 위치로 내려옴
         duration: 1,
         scrollTrigger: {
@@ -113,7 +119,7 @@
         });
 
         gsap.to("#value-back", {
-        width: "9vw",
+        width: skillW.back,
         y: 0, // 원래 위치로 내려옴
         duration: 1,
         scrollTrigger: {
@@ -124,7 +130,7 @@
         });
 
         gsap.to("#value-engineering", {
-        width: "18vw",
+        width: skillW.engineering,
         y: 0, // 원래 위치로 내려옴
         duration: 1,
         scrollTrigger: {
@@ -135,7 +141,7 @@
         });
 
         gsap.to("#value-tools", {
-        width: "16vw",
+        width: skillW.tools,
         y: 0, // 원래 위치로 내려옴
         duration: 1,
         scrollTrigger: {

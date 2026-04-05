@@ -463,3 +463,162 @@ section.scroll {
     display: inline-block; /* 단어 단위 배치 유지 */
     opacity: 0.01;          /* 조명 비치기 전 어두운 상태 */
 }
+
+/* ── 모바일 반응형 (max-width: 768px) ── */
+@media (max-width: 768px) {
+
+    /* START */
+    .start .creative {
+        font-size: 9vh;
+    }
+
+    .start .dot {
+        top: -3%;
+        left: 10%;
+    }
+
+    .start .scroll {
+        top: 22%;
+    }
+
+    /* MARQUEE */
+    .marquee-inner span {
+        font-size: 10vw;
+    }
+
+    /* ABOUT */
+    .about {
+        height: auto;
+        min-height: 100vh;
+        padding: 5vh 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about .profile {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 70vw;
+        height: 70vw;
+        border-radius: 30px;
+        margin-top: 5vh;
+    }
+
+    .about .profile img {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+    }
+
+    .about .img {
+        display: none;
+    }
+
+    .about-title {
+        position: relative;
+        top: 0;
+        left: 0;
+        text-align: center;
+        margin-top: 3vh;
+    }
+
+    .about-intro {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 3.5vh;
+        text-align: center;
+    }
+
+    .about p {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 1.8vh;
+        text-align: left;
+        line-height: 1.7;
+        opacity: 0;
+        margin-top: 2vh;
+        width: 100%;
+    }
+
+    /* SKILLS */
+    .skills {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 8vh;
+    }
+
+    .skills-title {
+        top: 5%;
+        left: 5%;
+    }
+
+    .skills-intro {
+        top: 5%;
+        left: 5%;
+        font-size: 5vh;
+    }
+
+    .skill-list {
+        height: auto;
+    }
+
+    .Frontend,
+    .Backend,
+    .Engineering,
+    .tools {
+        width: 90vw;
+        left: 5%;
+        height: auto;
+        min-height: 8vh;
+        padding-bottom: 2vh;
+    }
+
+    .Frontend    { top: 12%; }
+    .Backend     { top: 15%; }
+    .Engineering { top: 18%; }
+    .tools       { top: 21%; }
+
+    .skill-h3 {
+        font-size: 22px;
+    }
+
+    .skill-p {
+        position: relative;
+        top: 0;
+        left: 0;
+        text-align: left;
+        width: auto;
+        height: auto;
+        margin-top: 0.5vh;
+    }
+
+    .bar {
+        width: 100%;
+        top: 5%;
+    }
+
+    .level {
+        width: 60vw; /* 모바일 트랙 너비 (데스크톱 21vw 대비 넓게 설정) */
+        left: 0;
+        top: -40%;
+    }
+
+    .level-value {
+        left: 0;
+        top: -46%;
+    }
+
+    /* MOTIVE */
+    .motive-title {
+        font-size: 7vh;
+        top: 30%;
+    }
+}
